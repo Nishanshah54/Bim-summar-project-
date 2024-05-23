@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items Management</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            /* border: 1px solid #8fbbf4; */
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #d0f9f8;
+        }
+    </style>
+</head>
+<body>
+    <h2>Insert New Item</h2>
+    <form action="../addCatogory/insert.php" method="POST">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name" required></td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td><input type="number" name="price" required></td>
+            </tr>
+            <tr>
+                <th>Image URL</th>
+                <td><input type="text" name="image" required></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Insert">
+    </form>
+<!-- 
+    <h2>Update Item</h2>
+    <form action="update.php" method="POST">
+        <table>
+            <tr>
+                <th>Item ID</th>
+                <td><input type="text" name="id" required></td>
+            </tr>
+            <tr>
+                <th>New Name</th>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <th>New Price</th>
+                <td><input type="number" name="price"></td>
+            </tr>
+            <tr>
+                <th>New Image URL</th>
+                <td><input type="text" name="image"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Update">
+    </form>
+
+    <h2>Delete Item</h2>
+    <form action="delete.php" method="POST">
+        <table>
+            <tr>
+                <th>Item ID</th>
+                <td><input type="text" name="id" required></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Delete">
+    </form> -->
+</body>
+</html>

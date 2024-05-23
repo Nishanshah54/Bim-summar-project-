@@ -1,0 +1,61 @@
+/* Add this to your style1.css file */
+
+/* Ensuring the container adapts well to different screen sizes */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+}
+
+/* Adjusting the row to have some spacing */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Adjusting columns for different screen sizes */
+.col-md-3 {
+    flex: 0 0 23%;
+    max-width: 23%;
+}
+
+.col-sm-8 {
+    flex: 0 0 48%;
+    max-width: 48%;
+}
+
+.thumbnail {
+    position: relative;
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+/* Ensuring images are responsive */
+.thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Caption styling */
+.caption {
+    padding: 9px;
+    color: #333;
+}
+
+/* Media query for smaller devices */
+@media (max-width: 768px) {
+    .col-md-3, .col-sm-8 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
