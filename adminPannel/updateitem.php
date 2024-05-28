@@ -51,7 +51,7 @@ if(isset($_GET['id'])) {
         <tr>  
             <td><input type="text" name="new_id" value="<?php echo $id; ?>" disabled></td>            
             <td><input type="text" name="name" value="<?php echo $name; ?>"></td>
-            <td><input type="number" name="price" value="<?php echo $price; ?>"></td>
+            <td><input type="number" name="price"  min="0" value="<?php echo $price; ?>"></td>
             <td><input type="file" name="new_image" ></td>
             <td>
                         <select id="category" name="category" required>

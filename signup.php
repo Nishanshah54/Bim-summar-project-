@@ -36,24 +36,24 @@ error_reporting(0);
                         <h1><b>SIGN UP</b></h1>
                         <form method="post" action="user_registration_script.php">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="name" placeholder="Name" required="true">
+                                <input type="text" class="form-control" name="name" placeholder="Name" required="true" pattern="[a-z A-Z]+" title="only alphabets are allowed ,no numbers, speical characters etc">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Email" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                <input type="email" class="form-control" name="email" placeholder="Email" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="abc123@gmail.com">
                             </div> 
                             <div class="form-group">
-                                <input type="password" class="form-control" name="password" placeholder="Password(min. 6 characters)" required="true" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$">
+                                <input type="password" class="form-control" name="password" placeholder="Password(min. 6 characters)" title="include 8 charset include alphabets and  interger only" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required="true">
                                 <!-- <input type="password" class="form-control" name="password" placeholder="Password(min. 6 characters)" required="true" > -->
                             </div>
                             <div class="form-group">
 
-                                <input type="tel" class="form-control" name="contact" placeholder="Contact" required="true">
+                                <input type="tel" class="form-control" name="contact" placeholder="Contact" required="true"  pattern="98\d{8}" title="num start with 98 and total 10 number">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="city" placeholder="City" required="true">
+                                <input type="text" class="form-control" name="city" placeholder="City" required="true" pattern="[a-z A-Z]+">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="address" placeholder="Address" required="true">
+                                <input type="text" class="form-control" name="address" placeholder="Address" required="true" pattern="[a-z A-Z 0-9]+" title="only  alphabet and number are allow">
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Sign Up">

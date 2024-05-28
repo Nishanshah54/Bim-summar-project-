@@ -22,7 +22,7 @@ error_reporting(0);
                 </tr>
                 <tr>
                     <th><label for="price">Price:</label></th>
-                    <td><input type="number" id="price" name="price" step="0.01" required placeholder="Rs 2000"><br><br></td>
+                    <td><input type="number" id="price" name="price" min="0" step="0.01" required placeholder="Rs 2000"><br><br></td>
                 </tr>
                 <tr>
                     <th><label for="category">Category:</label></th>
