@@ -1,5 +1,7 @@
 <?php
     session_start();
+       
+error_reporting(0);
     require '../connection.php';
     if(!isset($_SESSION['Admin_email'])){
         header('location:../adminLogin/adminlogin.php');
@@ -14,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = $_POST['price'];
     $category = $_POST['category'];
     $image = $_FILES['image'];
+    $Quantity=$_POST['Quantity'];
 
     // Handle the image upload
     $target_dir = "../uploads/";
@@ -70,8 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         if (move_uploaded_file($image["tmp_name"], $target_file)) {
             // Prepare and bind
-            $stmt = $con->prepare("INSERT INTO items (name, price, category, image) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sdss", $name, $price, $category, $target_file);
+            $stmt = $con->prepare("INSERT INTO items (name, price, category, image,Quantity) VALUES (?, ?, ?, ?,?)");
+            $stmt->bind_param("sdsss", $name, $price, $category, $target_file,$Quantity);
 
             // Execute the statement
             if ($stmt->execute()) {

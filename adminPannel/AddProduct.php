@@ -22,7 +22,7 @@ error_reporting(0);
                 </tr>
                 <tr>
                     <th><label for="price">Price:</label></th>
-                    <td><input type="number" id="price" name="price" min="0" step="0.01" required placeholder="Rs 2000"><br><br></td>
+                    <td><input type="number" id="price" name="price" min="0" step="4" required placeholder="Rs 2000"><br><br></td>
                 </tr>
                 <tr>
                     <th><label for="category">Category:</label></th>
@@ -40,6 +40,10 @@ error_reporting(0);
                 <tr>
                     <th><label for="image">Image:</label></th>
                     <td><input type="file" id="image" name="image" required><br><br></td>
+                </tr>
+                <tr>
+                    <th><label for="Quantity">Quantity</label></th>
+                    <th><input type="number" id="Quantity" min="0" required name="Quantity" step="5"  max="1000" placeholder="50"> </th>
                 </tr>
                 <tr>
                     <th><input type="submit" value="Insert"></th>

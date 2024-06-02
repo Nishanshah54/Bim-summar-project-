@@ -1,4 +1,6 @@
 <?php
+   
+   error_reporting(0);
     session_start();
     require 'connection.php';
     if(!isset($_SESSION['email'])){

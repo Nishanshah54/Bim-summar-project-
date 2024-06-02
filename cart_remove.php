@@ -1,4 +1,6 @@
 <?php
+    
+error_reporting(0);
     require 'connection.php';
     session_start();
     $item_id=$_GET['id'];

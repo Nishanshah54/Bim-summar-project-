@@ -24,7 +24,7 @@
                             <li><a href="viewProduct.php"><span class="glyphicon glyphicon-wrench"></span>view and modifyProduct </a></li>
                             <li><a href="bug_complain.php"><span class="glyphicon glyphicon-comment"></span> view  bug & complain </a></li>
                             <li><a href="../logout.php"><span class="glyphicon glyphicon-log-out"></span>AdminLogout</a></li>
-                            <li><a href="../Adminsignup.php"><span class="glyphicon glyphicon-plus-sign"></span>Add new admin</a></li>
+                            <li><a href="../adminLogin/Adminsignup.php"><span class="glyphicon glyphicon-plus-sign"></span>Add new admin</a></li>
 
                            <?php
                            }

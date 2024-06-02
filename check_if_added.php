@@ -1,5 +1,6 @@
 <?php
-    
+       
+error_reporting(0);
     function check_if_added_to_cart($item_id){
         //session_start();    
         require 'connection.php';

@@ -1,4 +1,6 @@
 <?php
+   
+   error_reporting(0);
     session_start();
     require 'connection.php';
     if(!isset($_SESSION['email']))
@@ -134,7 +136,7 @@
                     <p><strong>Step 2:</strong> Navigate to the 'Send Money' or 'Pay' section.</p>
                     <p><strong>Step 3:</strong> Enter the following details:</p>
                     <ul>
-                        <li><strong>Recipient:</strong>[ Name or ID]</li>
+                        <li><strong>Recipient:</strong> [Your Business Name or ID]</li>
                         <li><strong>Amount:</strong> [Total Amount]</li>
                         <li><strong>Reference:</strong> [Order Number or Description]</li>
                     </ul>

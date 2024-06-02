@@ -3,14 +3,67 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <title>Title</title>
+    <title>Password Brute Force</title>
+    <script>
+        var correctPin = 8731; // Simulate the correct pin
+
+        function checking_password(enteredPin) {
+            return parseInt(enteredPin) === correctPin;
+        }
+
+        function bruteForce() {
+            var max_pin = 10000000;
+            for (var pin = 0; pin <= max_pin; pin++) {
+                document.getElementById('pass').value = pin; // Set the value of the password input field
+                var result = checking_password(pin); // Call the function to check the password
+
+                if (result) { // If the password is correct
+                    console.log("Checking " + pin + " as pin: Correct");
+                    document.getElementById("response").innerHTML += pin + " is Correct<br>"; // Display the correct pin
+                    document.getElementById('correctPin').value = pin; // Set the hidden input value to the correct pin
+                    document.getElementById('loginForm').submit(); // Submit the form
+                    return true;
+                } else {
+                    console.log("Checking " + pin + " as pin: Incorrect");
+                }
+
+                if (pin === max_pin) { // If reached the max_pin without finding the correct one
+                    document.getElementById("response").innerHTML += "No password is correct<br>"; // Display that no password was correct
+                }
+            }
+            return false;
+        }
+    </script>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <form action="">
-        <input type="number" min="0" name="number">
-        <input type="submit">
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <div class="container">
+        <div class="col">
+            <form id="loginForm" action="nextpage.html" method="GET" onsubmit="return bruteForce();">
+                <table>
+                    <tr>
+                        <th>Username:</th>
+                        <th><input type="text" name="username1" id="userName" value="admin"/></th>
+                    </tr>
+                    <tr>
+                        <th>Password:</th>
+                        <th><input type="password" name="password" id="pass" placeholder="Password"/></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><p id="response" style="color: red;"></p></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><input type="hidden" name="correctPin" id="correctPin"/></th>
+                    </tr>
+                    <tr>
+                        <th><button type="reset">Reset</button></th>
+                        <th><button type="submit">Brute Force</button></th>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,58 +1,58 @@
 <?php
-    require 'connection.php';
-    
 error_reporting(0);
-    //1.session setup
-    session_start();
-    //2.form Data Handling
-    $email=mysqli_real_escape_string($con,$_POST['email']);
-     //mysqli_real_escape_string() to prevent SQL injection attacks.
-     
-    $regex_email="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,3})$/";
-    //it defines a regular expression ($regex_email) to validate the email format.
+session_start();
+require 'connection.php';
 
-    //3.Email Formate Validation
-    if(!preg_match($regex_email,$email))
-    { 
-        echo "Incorrect email. Redirecting you back to login page...";
-        ?>
-        <meta http-equiv="refresh" content="2;url=login.php" />  
-        <!-- If the email format is incorrect,
-         it displays an error message and redirects the user back to the login page after 2 seconds using HTML meta refresh. -->
-        <?php
-    }
-    //p.password Handling
-    $password=md5(md5(mysqli_real_escape_string($con,$_POST['password'])));
-    //sanitizes it and then hashes it twice using MD5 
-    if(strlen($password)<6){
-        echo "Password should have atleast 6 characters. Redirecting you back to login page...";
-         // Redirect user to login page after 2 seconds
-        ?>
-        <meta http-equiv="refresh" content="2;url=login.php" />
-        <?php
-    }
-    $user_authentication_query="select id,email from users where email='$email' and password='$password'";
-    $user_authentication_result=mysqli_query($con,$user_authentication_query) or die(mysqli_error($con));
-    $rows_fetched=mysqli_num_rows($user_authentication_result);
-    if($rows_fetched==0){
-        //no user
-        //redirecting to same login page
-        ?>
-        <script>
-            window.alert("Wrong username or password");
-        </script>
-        <meta http-equiv="refresh" content="1;url=login.php" />
-        <?php
-        //header('location: login');
-        //echo "Wrong email or password.";
-    }else{
-        $row=mysqli_fetch_array($user_authentication_result);
-        $_SESSION['email']=$email;
-        $_SESSION['id']=$row['id'];  //user id
+$email = mysqli_real_escape_string($con, $_POST['email']);
+$password = mysqli_real_escape_string($con, $_POST['password']);
+$user_type = mysqli_real_escape_string($con, $_POST['user_type']);
+
+// Validate email
+$regex_email = "/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/";
+if (!preg_match($regex_email, $email)) {
+    echo "Incorrect email. Redirecting you back to login page...";
+    echo '<meta http-equiv="refresh" content="2;url=login.php" />';
+    exit();
+}
+
+// Validate password length
+if (strlen($password) < 6) {
+    echo "Password should have at least 6 characters. Redirecting you back to login page...";
+    echo '<meta http-equiv="refresh" content="2;url=login.php" />';
+    exit();
+}
+
+// Hash password for user login
+if ($user_type == 'user') {
+    $password = md5(md5($password));
+    $login_query = "SELECT id, email FROM users WHERE email='$email' AND password='$password'";
+} else {
+    // For admin login
+    $login_query = "SELECT id, email FROM adminloginf WHERE email='$email' AND password='$password'";
+}
+
+$result = mysqli_query($con, $login_query) or die(mysqli_error($con));
+$rows_fetched = mysqli_num_rows($result);
+
+if ($rows_fetched == 0) {
+    echo "<script>window.alert('Wrong username or password');</script>";
+    echo '<meta http-equiv="refresh" content="1;url=login.php" />';
+} else {
+    $row = mysqli_fetch_array($result);
+    $_SESSION['email'] = $email;
+    $_SESSION['id'] = $row['id'];
+
+    if ($user_type == 'user')
+     {
         header('location: products.php');
-        
-        // <meta http-equiv="refresh" content="6;url=products.php" />
-        
+    } else {
+        $row=mysqli_fetch_array($result);
+        $_SESSION['Admin_email']=$email;
+        $_SESSION['Admin_id']=$row['id'];  //user id
+        header('location: adminPannel/index.php');
+        ?>
+         <meta http-equiv="refresh" content="0.5;url=adminPannel/index.php" />
+        <?php
     }
-    
- ?>
+}
+?>

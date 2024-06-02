@@ -33,8 +33,8 @@
                             <!-- <li><a href="Search.php"><span class="glyphicon glyphicon-search"> <input type="text" placeholder="search items he"></span> search</a></li> -->
                             <!-- <li> <span class="glyphicon glyphicon-search"></span>< ?php  require '../SearchItems/Searchitems.php'; ?>  </li> -->
                             <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                            <li><a href="adminlogin/adminlogin.php"><span class="glyphicon glyphicon-log-in"></span> AdminLogin</a></li>
-                            <li><a href="bug_complain.php"><span class="glyphicon glyphicon-comment"></span> bug reports and complains</a></li>
+                            <!-- <li><a href="adminlogin/adminlogin.php"><span class="glyphicon glyphicon-log-in"></span> AdminLogin</a></li> -->
+                            <!-- <li><a href="bug_complain.php"><span class="glyphicon glyphicon-comment"></span> bug reports and complains</a></li> -->
                             <li> <a href=""><label for="category">Choose a category:</label></a> </li>
                             <li> <span><?php require ('Category/categoryDropdown.php');?> </span></li>
                             <?php

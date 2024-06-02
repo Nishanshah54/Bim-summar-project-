@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-    
+    <?php    
+        error_reporting(0);
+?>
 <head>
         <link rel="shortcut icon" href="img/lifestyleStore.png" />
         <title>Ns thakuri store</title>

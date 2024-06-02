@@ -1,5 +1,7 @@
 <?php
     session_start();
+       
+error_reporting(0);
     require 'connection.php';
     if(!isset($_SESSION['email'])){
         header('location:index.php');

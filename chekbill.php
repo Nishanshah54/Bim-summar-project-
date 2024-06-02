@@ -1,12 +1,18 @@
 <?php
     session_start();
+       
+error_reporting(0);
     require 'connection.php';
     if(!isset($_SESSION['email'])){
         header('location: login.php');
     }
     $user_id=$_SESSION['id'];
+    $user_products_query="select it.id,it.name,it.price,ut.quantity from users_items ut 
+    inner join items it
+     on it.id=ut.item_id
+      where ut.user_id='$user_id'";
     
-    $user_products_query="select it.id,it.name,it.price from users_items ut inner join items it on it.id=ut.item_id where ut.user_id='$user_id'";
+    // $user_products_query="select it.id,it.name,it.price from users_items ut inner join items it on it.id=ut.item_id where ut.user_id='$user_id'";
     $user_products_result=mysqli_query($con,$user_products_query) or die(mysqli_error($con));
     $no_of_user_products= mysqli_num_rows($user_products_result);
     $sum=0;
@@ -18,8 +24,9 @@
         </script>
     <?php
     }else{
-        while($row=mysqli_fetch_array($user_products_result)){
-            $sum=$sum+$row['price']; 
+        while($row=mysqli_fetch_array($user_products_result))
+        {
+            $sum=$sum+$row['price']*$row['quantity']; 
        }
     }
 ?>
@@ -49,7 +56,7 @@
                 <table class="table table-bordered table-striped">
                     <body>
                         <tr>
-                            <th>Item Number</th><th>Item Name</th><th>Price</th><th></th>
+                            <th>Item Number</th><th>Item Name</th><th>quantity</th><th>Price</th><th></th>
                         </tr>
                        <?php 
                         $user_products_result=mysqli_query($con,$user_products_query) or die(mysqli_error($con));
@@ -61,11 +68,13 @@
                         <tr>
                             <th><?php echo $counter ?></th>
                             <th><?php echo $row['name']?></th>
+                            <th><?php echo $row['quantity']?></th>
                             <th><?php echo $row['price']?></th>
                         </tr>
                        <?php $counter=$counter+1;}?>
                         <tr>
                             <!-- <th></th><th>Total</th><th>Rs <?php echo $sum;?>/-</th><th><a href="success.php?id=<?php echo $user_id?>" class="btn btn-primary"></a></th> -->
+                            <th></th>
                             <th></th>
                             <th>Total</th>
                             <th>Rs <?php echo $sum;?>/-</th>

@@ -1,5 +1,7 @@
 <?php
     session_start();
+       
+error_reporting(0);
     require '../connection.php';
     if(!isset($_SESSION['Admin_email'])){
         header('location:../adminLogin/adminlogin.php');

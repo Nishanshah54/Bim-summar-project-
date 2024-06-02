@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="img/lifestyleStore.png" />
+    <title>Ns Thakuri Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+    <script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style>
+        /* Add your custom styles here */
+    </style>
+</head>
+<body>
+<div>
+    <?php require 'header.php'; ?>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Welcome to our Ns Thakuri Store!</h1>
+            <p>We have the best cameras, watches, and shirts for you. No need to hunt around, we have all in one place.</p>
+        </div>
+    </div>
+    <div class="container">
+        <form method="GET" action="">
+            <table class="table">
+                <tr>
+                    <td><input type="text" name="search" class="form-control" placeholder="Search for products... i.e. Name or category"></td>
+                    <td><input type="number" id="min_price" name="min_price" value="<?php echo isset($_GET['min_price']) ? $_GET['min_price'] : '0'; ?>" class="form-control" placeholder="Min Price"></td>
+                    <td><input type="number" id="max_price" name="max_price" value="<?php echo isset($_GET['max_price']) ? $_GET['max_price'] : '10000'; ?>" class="form-control" placeholder="Max Price"></td>
+                    <td><button type="submit" class="btn btn-primary">Search</button></td>
+                </tr>
+            </table>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $query = "SELECT * FROM `items`";
+                if (isset($_GET['search']) || isset($_GET['min_price']) || isset($_GET['max_price'])) {
+                    $search = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
+                    $min_price = isset($_GET['min_price']) ? intval($_GET['min_price']) : 0;
+                    $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : 10000;
+
+                    $query = "SELECT * FROM `items` WHERE (`name` LIKE '%$search%' 
+                             OR `category` LIKE '%$search%')
+                             AND `price` BETWEEN $min_price AND $max_price";
+                }
+                $result = mysqli_query($con, $query);
+                while ($row = mysqli_fetch_array($result)) {
+                    $image = $row['image'];
+                    $id = $row['id'];
+                    $name = $row['name'];
+                    $price = $row['price'];
+                ?>
+                <tr>
+                    <td><img src='uploads/<?php echo $image; ?>' alt='<?php echo $name; ?>' style="max-width: 100px;"></td>
+                    <td><?php echo $name; ?></td>
+                    <td>Rs. <?php echo $price; ?>.00</td>
+                    <td>
+                        <?php if (!isset($_SESSION['email'])) { ?>
+                            <a href='login.php' role='button' class='btn btn-primary'>Buy Now</a>
+                        <?php } else {
+                            if (check_if_added_to_cart($id)) {
+                                echo '<a href="#" class="btn btn-success disabled">Added to cart</a>';
+                            } else { ?>
+                                <a href="cart_add.php?id=<?php echo $id; ?>" class="btn btn-primary">Add to cart</a>
+                            <?php }
+                        } ?>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    <?php require ('footer/footer.php') ?>
+</div>
+</body>
+</html>
